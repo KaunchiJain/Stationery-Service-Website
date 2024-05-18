@@ -1,5 +1,5 @@
 # Stationery-Service-Website
-An interactive stationery service website integrated with MySQL database for dynamic display of stationery items, implemented using HTML, CSS, JavaScript, Python and Flask framework to enhance interactivity and functionality
+An interactive stationery service website integrated with MySQL database for dynamic display of stationery items, implemented using HTML, CSS, JavaScript, Python and Flask framework to enhance interactivity and functionality.
 
 Make the required changes in directories and database connection details. Run the python file in terminal. You will encounter the address of local host. For eg: Running on all addresses (0.0.0.0)
  * Running on http://127.0.0.1:8080
