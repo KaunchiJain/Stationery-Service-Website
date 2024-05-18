@@ -1,0 +1,34 @@
+{% extends 'layout.html' %}
+
+{% block title %}Wishlist{% endblock %}
+
+{% block content %}
+<h2>Your Wishlist</h2>
+<!-- Add a button/link to clear the wishlist -->
+<form id="clear-wishlist-form" action="/pythonlogin/clear_wishlist" method="post">
+    <button type="submit" id="happy" class="btn btn-danger">Clear Wishlist</button>
+</form>
+<div class="product-list">
+    {% for product in wishlist_products %}
+    <div class="product">
+        <div class="product-image">
+            <img src="{{ product.image_url }}" alt="{{ product.product_name }} Image">
+        </div>
+        <h4>{{ product.product_name }}</h4>
+        <p>{{ product.product_description }}</p>
+        <p>Price: ₹{{ product.product_price }}</p>
+    </div>
+    {% endfor %}
+</div>
+<script>
+    // Add JavaScript to confirm clearing the cart
+    document.getElementById("happy").addEventListener("click", function () {
+        var confirmation = confirm("Are you sure you want to clear your wishlist?");
+        if (confirmation) {
+            document.getElementById("clear-wishlist-form").submit();
+        }
+    });
+</script>
+<a href="{{ url_for('home') }}" class="btn btn-primary">Back to Home</a>
+</div>
+{% endblock %}

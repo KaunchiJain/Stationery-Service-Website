@@ -1,0 +1,15 @@
+{% extends 'layout.html' %}
+
+{% block title %}Purchase Successful{% endblock %}
+
+{% block content %}
+<div class="purchase-success">
+    <h2>Purchase Successful</h2>
+    <p>Thank you for your order. Your purchase has been successfully completed.</p>
+    <p>An email confirmation has been sent to your registered email address.</p>
+</div>
+
+<div class="actions">
+    <a href="{{ url_for('home') }}" class="btn btn-primary">Back to Home</a>
+</div>
+{% endblock %}

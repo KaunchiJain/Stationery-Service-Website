@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Order History</title>
+</head>
+<body>
+    <h1>Order History</h1>
+
+    <ul>
+        {% for order in order_history %}
+            <li>
+                <h2>{{ order.product_name }}</h2>
+                <p>{{ order.product_description }}</p>
+                <p>Price: ${{ order.product_price }}</p>
+                <img src="{{ order.image_url }}" alt="{{ order.product_name }}" width="100">
+                <p>Order Date: {{ order.order_date }}</p>
+            </li>
+        {% endfor %}
+    </ul>
+    
+    <a href="{{ url_for('home') }}" class="btn btn-primary">Back to Home</a>
+</body>
+</html>

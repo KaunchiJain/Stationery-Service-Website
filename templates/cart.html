@@ -1,0 +1,38 @@
+{% extends 'layout.html' %}
+
+{% block title %}Cart{% endblock %}
+
+{% block content %}
+<h2>Your Cart</h2>
+<!-- Inside your cart.html or any other relevant page -->
+<form id="clear-cart-form" action="/pythonlogin/clear_cart" method="POST">
+    <button type="button" id="clear-cart-button" class="btn btn-danger">Clear Cart</button>
+</form>
+
+<script>
+    // Add JavaScript to confirm clearing the cart
+    document.getElementById("clear-cart-button").addEventListener("click", function () {
+        var confirmation = confirm("Are you sure you want to clear your cart?");
+        if (confirmation) {
+            document.getElementById("clear-cart-form").submit();
+        }
+    });
+</script>
+
+<div class="product-list">
+    {% for product in cart_products %}
+    <div class="product">
+        <div class="product-image">
+            <img src="{{ product.image_url }}" alt="{{ product.product_name }} Image">
+        </div>
+        <h4>{{ product.product_name }}</h4>
+        <p>{{ product.product_description }}</p>
+        <p>Price: ₹{{ product.product_price }}</p>
+    </div>
+    {% endfor %}
+</div>
+
+<a href="{{ url_for('home') }}" class="btn btn-primary">Back to Home</a>
+<a href="{{ url_for('checkout') }}" class="btn btn-success">Checkout</a>
+</div>
+{% endblock %}

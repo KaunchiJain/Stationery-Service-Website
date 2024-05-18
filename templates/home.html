@@ -1,0 +1,70 @@
+{% extends 'layout.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+    <h2>Home Page</h2>
+    <div class="search-bar">
+        <input type="text" id="search-input" placeholder="Search for products...">
+        <button id="search-button">Search</button>
+    </div>
+    
+    <h3>Featured Products</h3>
+    <div class="product-list">
+        {% for product in products %}
+        <div class="product-item">
+            <div class="product-image">
+                <img src="{{ product.image_url }}" alt="{{ product.product_name }} Image">
+            </div>
+            <div class="product-details">
+                <h4>{{ product.product_name }}</h4>
+                <p>{{ product.product_description }}</p>
+                <p>Price: ₹{{ product.product_price }}</p>
+                <div class="product-buttons">
+                    <button class="add-to-cart-button" data-product-id="{{ product.product_id }}">Add to Cart</button>
+                    <button class="add-to-wishlist-button" data-product-id="{{ product.product_id }}">Add to Wishlist</button>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="navigation-buttons">
+        <a href="{{ url_for('wishlist') }}" class="btn btn-primary gradient-button">Wishlist</a>
+        <a href="{{ url_for('cart') }}" class="btn btn-success gradient-button">Cart</a>
+        <a href="{{ url_for('order_history') }}" class="btn btn-success gradient-button">Order History</a>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            // Add to Cart and Add to Wishlist using SweetAlert2
+            $('.add-to-cart-button, .add-to-wishlist-button').click(function() {
+                var productId = $(this).data('product-id');
+                var isAddingToCart = $(this).hasClass('add-to-cart-button');
+                var action = isAddingToCart ? 'add_to_cart' : 'add_to_wishlist';
+
+                $.post('/pythonlogin/' + action + '/' + productId, function(data) {
+                    // Use SweetAlert2 for displaying messages
+                    var icon = data.message ? 'success' : 'error';
+                    var title = data.message ? 'Success' : 'Error';
+                    var message = data.message ? data.message : 'An error occurred';
+
+                    Swal.fire({
+                        icon: icon,
+                        title: title,
+                        text: message,
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                });
+            });
+        });
+    </script>
+</div>
+<script>
+    document.getElementById("search-button").addEventListener("click", function () {
+        var query = document.getElementById("search-input").value;
+        window.location.href = "/search?query=" + query;
+    });
+    </script>
+{% endblock %}

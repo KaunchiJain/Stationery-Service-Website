@@ -1,0 +1,26 @@
+{% extends 'layout.html' %}
+
+{% block title %}Checkout{% endblock %}
+
+{% block content %}
+<h2>Checkout</h2>
+
+<div class="product-list">
+    {% for product in cart_products %}
+    <div class="product">
+        <h4>{{ product.product_name }}</h4>
+        <p>{{ product.product_description }}</p>
+        <p>Price: ${{ product.product_price }}</p>
+    </div>
+    {% endfor %}
+</div>
+
+<div class="total-price">
+    <p>Total Price: ${{ total_price }}</p>
+</div>
+
+<a href="{{ url_for('home') }}" class="btn btn-primary">Back to Home</a>
+<a href="{{ url_for('purchase') }}" class="btn btn-success">Place Order</a>
+
+</div>
+{% endblock %}
